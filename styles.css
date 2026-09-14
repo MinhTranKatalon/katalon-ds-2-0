@@ -1,0 +1,17 @@
+/* ============================================================
+   KATALON DESIGN SYSTEM 2.0 — CSS entry point
+   Consumers link THIS file. It is @import lines only.
+
+   Load order matters. ds/katalon-ds.css must come LAST: it
+   overrides ~70 --k-* names that the marketing token file also
+   defines (green-tinted greys, Forest-green links and focus ring,
+   shadow:none, the desktop type scale). Reordering these imports
+   silently turns links blue and brings shadows back.
+
+   Then wrap the app in <div class="kds-scope"> — add
+   kds-scope--canvas for the light-green product canvas — and
+   build with var(--k-*). Never a literal hex.
+   ============================================================ */
+@import "tokens/fonts.css";
+@import "_ds/katalon-marketing-ds-duong-1c4004ff-1841-44d0-bd79-8c899994cb3d/colors_and_type.css";
+@import "ds/katalon-ds.css";

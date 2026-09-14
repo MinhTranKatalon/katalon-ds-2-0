@@ -1,0 +1,356 @@
+/* ============================================================
+   Katalon Marketing Design System
+   colors_and_type.css — base + semantic tokens
+
+   Typefaces (self-hosted, uploaded brand files)
+   ─────────
+   Inter          — 18pt optical size · body / UI (14–22px)
+   Inter Display  — 28pt optical size · headlines (24px+)
+   Inter Tight    — Google Fonts fallback for Display when
+                    the brand team prefers the tight cut
+                    (not uploaded; kept as CSS fallback).
+
+   All weights 100–900 + italics are available for both
+   self-hosted families.
+   ============================================================ */
+
+/* ───────── Inter — 18pt optical (body) ───────── */
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 100; font-display: swap;
+             src: url("fonts/Inter_18pt-Thin.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 100; font-display: swap;
+             src: url("fonts/Inter_18pt-ThinItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 200; font-display: swap;
+             src: url("fonts/Inter_18pt-ExtraLight.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 200; font-display: swap;
+             src: url("fonts/Inter_18pt-ExtraLightItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 300; font-display: swap;
+             src: url("fonts/Inter_18pt-Light.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 300; font-display: swap;
+             src: url("fonts/Inter_18pt-LightItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 400; font-display: swap;
+             src: url("fonts/Inter_18pt-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 400; font-display: swap;
+             src: url("fonts/Inter_18pt-Italic.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 500; font-display: swap;
+             src: url("fonts/Inter_18pt-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 500; font-display: swap;
+             src: url("fonts/Inter_18pt-MediumItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 600; font-display: swap;
+             src: url("fonts/Inter_18pt-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 600; font-display: swap;
+             src: url("fonts/Inter_18pt-SemiBoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 700; font-display: swap;
+             src: url("fonts/Inter_18pt-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 700; font-display: swap;
+             src: url("fonts/Inter_18pt-BoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 800; font-display: swap;
+             src: url("fonts/Inter_18pt-ExtraBold.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 800; font-display: swap;
+             src: url("fonts/Inter_18pt-ExtraBoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 900; font-display: swap;
+             src: url("fonts/Inter_18pt-Black.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 900; font-display: swap;
+             src: url("fonts/Inter_18pt-BlackItalic.ttf") format("truetype"); }
+
+/* ───────── Inter Display — 28pt optical (headlines) ───────── */
+@font-face { font-family: "Inter Display"; font-style: normal; font-weight: 100; font-display: swap;
+             src: url("fonts/Inter_28pt-Thin.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: italic; font-weight: 100; font-display: swap;
+             src: url("fonts/Inter_28pt-ThinItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: normal; font-weight: 200; font-display: swap;
+             src: url("fonts/Inter_28pt-ExtraLight.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: italic; font-weight: 200; font-display: swap;
+             src: url("fonts/Inter_28pt-ExtraLightItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: normal; font-weight: 300; font-display: swap;
+             src: url("fonts/Inter_28pt-Light.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: italic; font-weight: 300; font-display: swap;
+             src: url("fonts/Inter_28pt-LightItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: normal; font-weight: 400; font-display: swap;
+             src: url("fonts/Inter_28pt-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: italic; font-weight: 400; font-display: swap;
+             src: url("fonts/Inter_28pt-Italic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: normal; font-weight: 500; font-display: swap;
+             src: url("fonts/Inter_28pt-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: italic; font-weight: 500; font-display: swap;
+             src: url("fonts/Inter_28pt-MediumItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: normal; font-weight: 600; font-display: swap;
+             src: url("fonts/Inter_28pt-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: italic; font-weight: 600; font-display: swap;
+             src: url("fonts/Inter_28pt-SemiBoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: normal; font-weight: 700; font-display: swap;
+             src: url("fonts/Inter_28pt-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: italic; font-weight: 700; font-display: swap;
+             src: url("fonts/Inter_28pt-BoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: normal; font-weight: 800; font-display: swap;
+             src: url("fonts/Inter_28pt-ExtraBold.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: italic; font-weight: 800; font-display: swap;
+             src: url("fonts/Inter_28pt-ExtraBoldItalic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: normal; font-weight: 900; font-display: swap;
+             src: url("fonts/Inter_28pt-Black.ttf") format("truetype"); }
+@font-face { font-family: "Inter Display"; font-style: italic; font-weight: 900; font-display: swap;
+             src: url("fonts/Inter_28pt-BlackItalic.ttf") format("truetype"); }
+
+:root {
+  /* ───────── Brand core ───────── */
+  --k-brand-blue:        #5959eb;   /* Katalon primary brand / Scout */
+  --k-brand-green:       #19d89f;   /* Accent dot / wordmark sub-hits */
+  --k-brand-black:       #000000;   /* Logo / display headlines */
+  --k-brand-white:       #ffffff;
+  --k-brand-yellow:      #fed730;   /* Callouts, highlighter marks */
+  --k-brand-magenta:     #bf3dc2;   /* Category accent */
+
+  /* Sub-brand secondary accents seen in Figma */
+  --k-indigo-deep:       #24245e;   /* 900 */
+  --k-indigo-mid:        #35358d;   /* 800 */
+  --k-indigo-rich:       #412ed5;   /* 700 */
+
+  /* ───────── Blue scale (primary brand ramp) ───────── */
+  --k-blue-50:  #f9f9fe;
+  --k-blue-100: #f3f1ff;
+  --k-blue-200: #e8e5ff;
+  --k-blue-300: #aeaff5;
+  --k-blue-400: #7a7aef;
+  --k-blue-500: #5959eb;   /* BRAND */
+  --k-blue-600: #4849c0;
+  --k-blue-700: #412ed5;
+  --k-blue-800: #35358d;
+  --k-blue-900: #24245e;
+
+  /* ───────── Neutral / gray scale ───────── */
+  --k-gray-0:   #ffffff;
+  --k-gray-50:  #f8f8f8;
+  --k-gray-100: #f2f2f2;
+  --k-gray-200: #e5e5e5;
+  --k-gray-300: #d6d6d6;
+  --k-gray-400: #bbbbbb;
+  --k-gray-500: #9a9a9a;
+  --k-gray-600: #6a6a6a;
+  --k-gray-700: #414141;
+  --k-gray-800: #202020;
+  --k-gray-900: #000000;
+
+  /* ───────── Semantic — Success / Error / Warning / Info ───────── */
+  --k-success-500: #0f8461;
+  --k-success-700: #094f3a;
+  --k-success-100: #d1f7ec;
+  --k-success-50:  #eefcf8;
+
+  --k-error-500:   #d14343;
+  --k-error-700:   #a73636;
+  --k-error-100:   #ffebeb;
+
+  --k-warning-500: #cba226;
+  --k-warning-300: #e2bf2b;
+  --k-warning-100: #fff7d0;
+  --k-warning-50:  #fff9db;
+
+  --k-info-500:    #4849c0;
+  --k-info-100:    #e4e7f5;
+  --k-info-50:     #eff1fa;
+
+  /* ───────── Sequential / data viz ───────── */
+  --k-seq-1: #5959eb;
+  --k-seq-2: #19d89f;
+  --k-seq-3: #fed730;
+  --k-seq-4: #bf3dc2;
+  --k-seq-5: #0f8461;
+  --k-seq-6: #43509b;
+
+  /* Muted sequential variants */
+  --k-seq-1-soft: #c2c7e4;
+  --k-seq-2-soft: #a3efd9;
+  --k-seq-3-soft: #fff0b0;
+  --k-seq-4-soft: #eac8ea;
+  --k-seq-5-soft: #9fcec0;
+  --k-seq-6-soft: #636eac;
+
+  /* ───────── Text roles ───────── */
+  --k-text-primary:   #000000;    /* Headlines / hero text */
+  --k-text-body:      #202020;
+  --k-text-secondary: #414141;
+  --k-text-tertiary:  #6a6a6a;
+  --k-text-disabled:  #bbbbbb;
+  --k-text-invert:    #ffffff;
+  --k-text-link:      #5959eb;
+  --k-text-link-hover:#412ed5;
+
+  /* ───────── Background roles ───────── */
+  --k-bg-page:        #ffffff;
+  --k-bg-subtle:      #f8f8f8;
+  --k-bg-muted:       #f2f2f2;
+  --k-bg-dark:        #000000;     /* Hero/footer dark sections */
+  --k-bg-indigo:      #24245e;     /* Deep marketing panels */
+  --k-bg-brand:       #5959eb;     /* Indigo CTA backgrounds */
+  --k-bg-highlight:   #fed730;     /* Sticky-note highlighter */
+
+  /* ───────── Border roles ───────── */
+  --k-border-subtle:  #e5e5e5;
+  --k-border-default: #d6d6d6;
+  --k-border-strong:  #202020;
+  --k-border-brand:   #5959eb;
+  --k-focus-ring:     #5959eb;
+
+  /* ───────── Typeface families ───────── */
+  --k-font-display: "Inter Display", "Inter Tight", "Inter", -apple-system, system-ui, sans-serif;
+  --k-font-body:    "Inter", -apple-system, system-ui, sans-serif;
+  --k-font-mono:    ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ───────── Type scale — Desktop (≥769px) ───────── */
+  /* Display / hero */
+  --k-fs-display:   clamp(56px, 7vw, 96px); /* @kind font */
+  --k-lh-display:   1.05; /* @kind font */
+  --k-ls-display:   -0.02em; /* @kind font */
+
+  /* Headings — Inter Tight Medium (500) */
+  --k-fs-h1: 60px; /* @kind font */
+  --k-lh-h1: 1.1;  /* @kind font */
+  --k-fs-h2: 48px; /* @kind font */
+  --k-lh-h2: 1.15; /* @kind font */
+  --k-fs-h3: 36px; /* @kind font */
+  --k-lh-h3: 1.2;  /* @kind font */
+  --k-fs-h4: 30px; /* @kind font */
+  --k-lh-h4: 1.3;  /* @kind font */
+  --k-fs-h5: 24px; /* @kind font */
+  --k-lh-h5: 1.35; /* @kind font */
+  --k-fs-h6: 20px; /* @kind font */
+  --k-lh-h6: 1.4;  /* @kind font */
+
+  /* Body — Inter */
+  --k-fs-body-lg: 20px; /* @kind font */
+  --k-lh-body-lg: 1.7;  /* @kind font */
+  --k-fs-body-md: 18px; /* @kind font */ /* Body 3 (p) */
+  --k-lh-body-md: 1.7;  /* @kind font */
+  --k-fs-body-sm: 16px; /* @kind font */ /* Body 5 */
+  --k-lh-body-sm: 1.7;  /* @kind font */
+  --k-fs-caption: 14px; /* @kind font */
+  --k-lh-caption: 1.5;  /* @kind font */
+  --k-fs-micro:   12px; /* @kind font */
+  --k-lh-micro: 1.4;    /* @kind font */
+
+  /* Eyebrow — small, uppercase, tracked */
+  --k-fs-eyebrow: 14px; /* @kind font */
+  --k-tracking-eyebrow: 0.12em; /* @kind font */
+
+  /* ───────── Spacing scale ───────── */
+  --k-sp-1:  4px;
+  --k-sp-2:  8px;
+  --k-sp-3:  12px;
+  --k-sp-4:  16px;
+  --k-sp-5:  24px;
+  --k-sp-6:  32px;
+  --k-sp-7:  48px;
+  --k-sp-8:  64px;
+  --k-sp-9:  80px;
+  --k-sp-10: 120px;
+
+  /* ───────── Radii ───────── */
+  --k-radius-xs: 2px;
+  --k-radius-sm: 4px;
+  --k-radius-md: 8px;
+  --k-radius-lg: 12px;
+  --k-radius-xl: 20px;
+  --k-radius-2xl: 24px;
+  --k-radius-pill: 999px;
+
+  /* ───────── Shadows / elevation (neutral gray) ───────── */
+  --k-shadow-xs: 0 1px 2px rgba(18, 18, 20, 0.05);
+  --k-shadow-sm: 0 1px 3px rgba(18, 18, 20, 0.09), 0 1px 2px rgba(18, 18, 20, 0.05);
+  --k-shadow-md: 0 4px 12px rgba(18, 18, 20, 0.10), 0 2px 4px rgba(18, 18, 20, 0.06);
+  --k-shadow-lg: 0 12px 32px rgba(18, 18, 20, 0.14), 0 4px 8px rgba(18, 18, 20, 0.08);
+  --k-shadow-xl: 0 24px 48px rgba(18, 18, 20, 0.18);
+  --k-shadow-brand: 0 12px 32px rgba(18, 18, 20, 0.20);
+
+  /* ───────── Motion ───────── */
+  --k-ease-std:  cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --k-ease-out:  cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --k-ease-in:   cubic-bezier(0.4, 0, 1, 1); /* @kind other */
+  --k-dur-fast:  150ms; /* @kind other */
+  --k-dur-base:  200ms; /* @kind other */
+  --k-dur-slow:  320ms; /* @kind other */
+
+  /* ───────── Layout ───────── */
+  --k-container-max: 1280px;
+  --k-container-gutter: 24px;
+  --k-page-max: 1440px;
+}
+
+/* ============================================================
+   Semantic element styles
+   ============================================================ */
+
+html, body {
+  font-family: var(--k-font-body);
+  color: var(--k-text-body);
+  background: var(--k-bg-page);
+  font-size: var(--k-fs-body-sm);
+  line-height: var(--k-lh-body-sm);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--k-font-display);
+  color: var(--k-text-primary);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+h1 { font-size: var(--k-fs-h1); line-height: var(--k-lh-h1); font-weight: 600; letter-spacing: -0.02em; }
+h2 { font-size: var(--k-fs-h2); line-height: var(--k-lh-h2); font-weight: 600; letter-spacing: -0.02em; }
+h3 { font-size: var(--k-fs-h3); line-height: var(--k-lh-h3); font-weight: 600; }
+h4 { font-size: var(--k-fs-h4); line-height: var(--k-lh-h4); font-weight: 600; }
+h5 { font-size: var(--k-fs-h5); line-height: var(--k-lh-h5); font-weight: 500; }
+h6 { font-size: var(--k-fs-h6); line-height: var(--k-lh-h6); font-weight: 500; }
+
+.k-display {
+  font-family: var(--k-font-display);
+  font-size: var(--k-fs-display);
+  line-height: var(--k-lh-display);
+  letter-spacing: var(--k-ls-display);
+  font-weight: 700;
+  color: var(--k-text-primary);
+}
+
+p { margin: 0 0 var(--k-sp-4) 0; font-size: var(--k-fs-body-sm); line-height: var(--k-lh-body-sm); }
+.k-body-lg { font-size: var(--k-fs-body-lg); line-height: var(--k-lh-body-lg); }
+.k-body-md { font-size: var(--k-fs-body-md); line-height: var(--k-lh-body-md); }
+.k-body-sm { font-size: var(--k-fs-body-sm); line-height: var(--k-lh-body-sm); }
+.k-caption { font-size: var(--k-fs-caption); line-height: var(--k-lh-caption); color: var(--k-text-tertiary); }
+.k-micro   { font-size: var(--k-fs-micro);   line-height: var(--k-lh-micro); color: var(--k-text-tertiary); }
+
+.k-eyebrow {
+  font-family: var(--k-font-body);
+  font-size: var(--k-fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--k-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--k-text-tertiary);
+}
+
+a { color: var(--k-text-link); text-decoration: none; transition: color var(--k-dur-fast) var(--k-ease-std); }
+a:hover { color: var(--k-text-link-hover); text-decoration: underline; text-underline-offset: 3px; }
+
+code, pre {
+  font-family: var(--k-font-mono);
+  font-size: 0.92em;
+  background: var(--k-bg-muted);
+  border-radius: var(--k-radius-xs);
+}
+code { padding: 0.1em 0.4em; }
+
+/* Highlighter — yellow sticky-note mark seen in Katalon slides */
+.k-highlight {
+  background: var(--k-brand-yellow);
+  padding: 0.05em 0.2em;
+  border-radius: 2px;
+  mix-blend-mode: multiply;
+}
+
+/* ============================================================
+   Utility classes (lightweight; not an atomic framework)
+   ============================================================ */
+
+.k-container { max-width: var(--k-container-max); margin: 0 auto; padding: 0 var(--k-container-gutter); }
+.k-stack > * + * { margin-top: var(--k-sp-4); }
+.k-stack-lg > * + * { margin-top: var(--k-sp-6); }

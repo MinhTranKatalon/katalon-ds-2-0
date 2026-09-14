@@ -1,0 +1,5 @@
+/* Katalon DS 2.0 — typefaces.
+   Inter Tight 300 is REQUIRED: the sub-brand subname is weight 300
+   (--k-sub-weight). Drop the 300 and every lockup silently renders
+   at 400, which is wrong and invisible in review. */
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");

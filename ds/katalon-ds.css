@@ -1,0 +1,583 @@
+/* ============================================================
+   TOKEN PRECEDENCE — read before editing
+   This file is loaded AFTER the bound marketing design system's
+   colors_and_type.css, and ~70 --k-* names exist in both with different
+   values. The values in THIS file are the DS 2.0 contract and are the ones
+   that must win: neutral greys are green-tinted (not #f2f2f2 greys), links
+   and the focus ring are Forest Green (not #5959EB blue), every --k-shadow-*
+   is none (the system is flat), and the type scale is the desktop one.
+   Consequences to respect:
+     · Never move this <link> above colors_and_type.css. Links would turn
+       blue and shadows would come back, silently.
+     · A page that loads only the marketing bundle is NOT on DS 2.0. Load
+       this file too.
+     · Don't "fix" a difference by editing the marketing file — it belongs to
+       another surface. Differences here are intentional overrides.
+   ============================================================ */
+
+/* ============================================================
+   KATALON DESIGN SYSTEM 2.0
+   Single-file, drop-in token + component stylesheet.
+   Generated from the current "Katalon DS 2.0.dc.html" content.
+   ------------------------------------------------------------
+   Usage
+     <link rel="stylesheet" href="katalon-ds-2.1.css">
+     Wrap your app in a scope element:  <div class="kds-scope"> … </div>
+     Style with var(--k-*) tokens, or use the .kds-* classes below.
+
+   ------------------------------------------------------------
+   WHAT CHANGED vs 2.0 export
+   • 8 color scales × 11 steps (50 → 950). PRIMARY STEP IS NOW 600
+     (was 500). Use the semantic aliases (--k-primary, --k-text-link,
+     --k-bg-action…) and you are insulated from the renumbering.
+   • PASS / SUCCESS now SHARES the Action green — the separate blue
+     pass ramp is gone. Blue Slate is a NEW ramp for charts/editorial
+     and the "Pending" status.
+   • NEW ramps: Steel Pink (marketing pop) · Blue Slate (chart/editorial).
+   • FLAT elevation: no drop shadows anywhere. Depth = 1px borders
+     + tinted surfaces. Shadow tokens resolve to none.
+   • Canvas: light-green app canvas #eaf6ef; cards white on top.
+   • Yellow text must use warning-800/900 (600 fails contrast).
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* ═════════ BRAND MARK (logo only — never recolour) ═════════ */
+  --k-brand-green-dot: #19d89f;
+  --k-brand-black:     #000000;
+  --k-brand-white:     #ffffff;
+
+  /* ═════════ 1 · FOREST FORWARD — ACTION (primary)  ═════════
+     One green: CTA, link, focus — and Pass/Success. 600 = primary. */
+  --k-action-50:  #f0faf5;
+  --k-action-100: #ecf4f2;
+  --k-action-200: #cfe6df;
+  --k-action-300: #9fcec0;
+  --k-action-400: #6fb5a0;
+  --k-action-500: #3f9d81;
+  --k-action-600: #0f8461;   /* ★ PRIMARY ACTION */
+  --k-action-700: #0c6a4e;   /* hover */
+  --k-action-800: #094f3a;   /* active */
+  --k-action-900: #063527;
+  --k-action-950: #032118;
+
+  /* ═════════ 2 · BRIGHT GREEN — accent (brand dot, "aha") ═════════
+     Confirmations, logo dot. Never a CTA. 600 = brand. */
+  --k-bright-50:  #f7fefb;
+  --k-bright-100: #eefcf8;
+  --k-bright-200: #d1f7ec;
+  --k-bright-300: #a3efd9;
+  --k-bright-400: #75e8c5;
+  --k-bright-500: #47e0b2;
+  --k-bright-600: #19d89f;   /* ★ brand accent */
+  --k-bright-700: #14ad7f;
+  --k-bright-800: #0f825f;
+  --k-bright-900: #0a5640;
+  --k-bright-950: #062f24;
+
+  /* ═════════ 3 · LUMINOUS LILAC — INFO ═════════
+     Neutral information: info banners, "Beta" badges, secondary links. */
+  --k-info-50:  #fcfcff;
+  --k-info-100: #f9f9fe;
+  --k-info-200: #f3f1ff;
+  --k-info-300: #e8e5ff;
+  --k-info-400: #aeaff5;
+  --k-info-500: #7a7aef;
+  --k-info-600: #5959eb;   /* ★ info */
+  --k-info-700: #412ed5;
+  --k-info-800: #3526a8;
+  --k-info-900: #291d7a;
+  --k-info-950: #181046;
+
+  /* ═════════ 4 · STEEL PINK — marketing pop ═════════
+     "Hot" stickers, illustration fills, campaigns. Avoid in product UI. */
+  --k-pink-50:  #fefbfe;
+  --k-pink-100: #fcf7fd;
+  --k-pink-200: #f8ecf9;
+  --k-pink-300: #eac8ea;
+  --k-pink-400: #d98bda;
+  --k-pink-500: #c95acb;
+  --k-pink-600: #bf3dc2;   /* ★ marketing pop */
+  --k-pink-700: #aa36ac;
+  --k-pink-800: #8c2d8e;
+  --k-pink-900: #732574;
+  --k-pink-950: #4a184b;
+
+  /* ═════════ 5 · YELLOW BUZZ — WARNING / highlight ═════════
+     Yellow TEXT must use 800/900 — 600 fails contrast on white. */
+  --k-warning-50:  #fffef8;
+  --k-warning-100: #fffcef;
+  --k-warning-200: #fff9db;
+  --k-warning-300: #fff0b0;
+  --k-warning-400: #ffeda2;
+  --k-warning-500: #ffe46d;
+  --k-warning-600: #fed730;   /* ★ brand yellow */
+  --k-warning-700: #e0bd2a;
+  --k-warning-800: #b8991f;   /* min. step for yellow text */
+  --k-warning-900: #8a7218;
+  --k-warning-950: #524409;
+
+  /* ═════════ 6 · BLUE SLATE — chart / editorial ═════════
+     Main chart series, editorial headings, "Pending" status. */
+  --k-slate-50:  #f7f8fc;
+  --k-slate-100: #eff1fa;
+  --k-slate-200: #e4e7f5;
+  --k-slate-300: #c2c7e4;
+  --k-slate-400: #99a1d1;
+  --k-slate-500: #636eac;
+  --k-slate-600: #43509b;   /* ★ chart / editorial */
+  --k-slate-700: #2d377d;
+  --k-slate-800: #232c63;
+  --k-slate-900: #1a2149;
+  --k-slate-950: #0f142e;
+
+  /* ═════════ 7 · SIGNAL RED — FAIL / ERROR ═════════
+     Test fail, errors, destructive actions; screenshot highlights. */
+  --k-fail-50:  #fef4f4;
+  --k-fail-100: #fde7e7;
+  --k-fail-200: #fbcfcf;
+  --k-fail-300: #f5a3a3;
+  --k-fail-400: #e57272;
+  --k-fail-500: #dc5555;
+  --k-fail-600: #d14343;   /* ★ fail / destructive */
+  --k-fail-700: #a73636;
+  --k-fail-800: #7d2828;
+  --k-fail-900: #5c1e1e;
+  --k-fail-950: #340f0f;
+
+  /* ═════════ 8 · NEUTRAL — surfaces, borders, text ═════════
+     Green-tinted neutral. Utility scale — no single primary step. */
+  --k-gray-0:   #ffffff;
+  --k-gray-50:  #f6f8f7;
+  --k-gray-100: #eef2f0;
+  --k-gray-200: #e1e7e4;
+  --k-gray-300: #cdd6d2;
+  --k-gray-400: #aab4af;
+  --k-gray-500: #7f8b86;
+  --k-gray-600: #5b6661;
+  --k-gray-700: #3c4642;
+  --k-gray-800: #1f2925;
+  --k-gray-900: #0c1411;
+  --k-gray-950: #060a08;
+
+  /* ═════════ SEMANTIC ALIASES — build against THESE ═════════ */
+  --k-primary:        var(--k-action-600);
+  --k-primary-hover:  var(--k-action-700);
+  --k-primary-active: var(--k-action-800);
+  --k-highlight:      var(--k-warning-600);   /* sticky-note yellow */
+
+  /* PASS / SUCCESS = Action green (deliberately shared) */
+  --k-pass-50:   var(--k-action-50);
+  --k-pass-100:  var(--k-action-100);
+  --k-pass-200:  var(--k-action-200);
+  --k-pass-500:  var(--k-action-600);   /* pass dot / bar */
+  --k-pass-600:  var(--k-action-600);   /* pass icon */
+  --k-pass-700:  var(--k-action-700);   /* pass text */
+  --k-success-100: var(--k-action-100);
+  --k-success-500: var(--k-action-600);
+  --k-error-100:   var(--k-fail-100);
+  --k-error-500:   var(--k-fail-600);
+  --k-pending-500: var(--k-slate-600);  /* "Pending" status = Blue Slate */
+
+  /* ═════════ Data-viz (categorical series) ═════════ */
+  --k-seq-1: var(--k-slate-600);    /* main series — Blue Slate */
+  --k-seq-2: var(--k-action-600);   /* green */
+  --k-seq-3: var(--k-warning-600);  /* yellow buzz */
+  --k-seq-4: var(--k-pink-600);     /* steel pink */
+  --k-seq-5: var(--k-info-600);     /* lilac */
+  --k-seq-6: var(--k-slate-400);    /* light slate */
+
+  /* ═════════ TEXT roles ═════════ */
+  --k-text-primary:    #0c1411;
+  --k-text-body:       #1f2925;
+  --k-text-secondary:  #3c4642;
+  --k-text-tertiary:   #5b6661;
+  --k-text-disabled:   #aab4af;
+  --k-text-invert:     #ffffff;
+  /* Green INK is action-700 on every ground. action-600 measures 4.67:1 on
+     pure white but only 4.14–4.42:1 on the tinted grounds (bg-subtle,
+     bg-muted, bg-canvas) — under the 4.5 floor, including the product canvas.
+     700 clears them all (6.59 white · 6.23 subtle · 5.94 canvas · 5.83 muted),
+     so ink takes ONE value everywhere instead of a per-ground exception.
+     600 remains the FILL colour (buttons, chips, accents), judged at 3:1. */
+  --k-text-link:       var(--k-action-700);
+  --k-text-link-hover: var(--k-action-800);
+
+  /* ═════════ SURFACE / background roles ═════════ */
+  --k-bg-page:      var(--k-gray-0);   /* page, cards */
+  --k-bg-subtle:    var(--k-gray-50);   /* alt sections / white-tint canvas */
+  --k-bg-muted:     var(--k-gray-100);   /* sunken areas, nav/row hover */
+  --k-bg-canvas:    #eaf6ef;   /* ★ light-green app canvas */
+  --k-bg-highlight: var(--k-highlight);
+  --k-bg-action:    var(--k-action-600);
+  --k-bg-forest:    #06392b;   /* deep-green marketing / code panels */
+  --k-bg-dark:      #0c1411;   /* footer, code, dark areas */
+
+  /* ═════════ BORDER roles ═════════ */
+  --k-border-subtle:  #eef2f0;
+  --k-border-default: #e1e7e4;
+  --k-border-strong:  #1f2925;
+  --k-border-action:  var(--k-action-600);
+  --k-focus-ring:     var(--k-action-600);
+
+  /* ═════════ TYPEFACES ═════════ */
+  --k-font-display: "Inter Tight", "Inter", -apple-system, system-ui, sans-serif;
+  --k-font-body:    "Inter", -apple-system, system-ui, sans-serif;
+  --k-font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ═════════ TYPE SCALE — fluid headings, fixed body ═════════ */
+  --k-fs-display: clamp(48px, 6vw, 88px);   --k-lh-display: 1.04; --k-ls-display: -0.03em;
+  --k-fs-h1: clamp(36px, 4.4vw, 56px);      --k-lh-h1: 1.08;
+  --k-fs-h2: clamp(30px, 3.4vw, 44px);      --k-lh-h2: 1.12;
+  --k-fs-h3: clamp(24px, 2.4vw, 34px);      --k-lh-h3: 1.18;
+  --k-fs-h4: clamp(20px, 1.8vw, 26px);      --k-lh-h4: 1.28;
+  --k-fs-h5: 20px;  --k-lh-h5: 1.35;
+  --k-fs-h6: 17px;  --k-lh-h6: 1.4;
+
+  --k-fs-body-lg: 20px; --k-lh-body-lg: 1.6;
+  --k-fs-body-md: 18px; --k-lh-body-md: 1.6;
+  --k-fs-body-sm: 16px; --k-lh-body-sm: 1.5;
+  --k-fs-caption: 14px; --k-lh-caption: 1.4;
+  --k-fs-micro:   12px; --k-lh-micro: 1.4;
+
+  --k-fs-eyebrow: 13px;
+  --k-tracking-eyebrow: 0.12em;
+
+  /* ═════════ SPACING — 4px base, steps 1..10 ═════════
+     1-6 inside components · 7-10 between blocks/sections */
+  --k-sp-1: 4px;  --k-sp-2: 8px;  --k-sp-3: 12px; --k-sp-4: 16px; --k-sp-5: 24px;
+  --k-sp-6: 32px; --k-sp-7: 48px; --k-sp-8: 64px; --k-sp-9: 80px; --k-sp-10: 120px;
+
+  /* ═════════ RADIUS — element → token map ═════════
+     text-fill/input 8 · button 10 · banner 12 · card 16 · popup 20 · pill 999 */
+  --k-radius-xs: 2px;  --k-radius-sm: 4px;  --k-radius-md: 8px;
+  --k-radius-lg: 12px; --k-radius-xl: 16px; --k-radius-2xl: 20px;
+  --k-radius-pill: 999px;
+
+  /* ═════════ ELEVATION — FLAT SYSTEM ═════════
+     2.1 is flat: no drop shadows. Depth = 1px borders + tinted
+     surfaces. Tokens kept for API compatibility; they resolve to none. */
+  --k-shadow-xs: none;
+  --k-shadow-sm: none;
+  --k-shadow-md: none;
+  --k-shadow-lg: none;
+  --k-shadow-xl: none;
+  --k-shadow-action: none;
+
+  /* ═════════ MOTION — short, purposeful ═════════
+     toggle/hover 150 · card/menu/accordion 200 · modal/drawer 320 */
+  --k-ease-std: cubic-bezier(0.4, 0, 0.2, 1);
+  --k-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --k-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --k-ease-in:  cubic-bezier(0.4, 0, 1, 1);
+  --k-dur-fast: 150ms;
+  --k-dur-base: 200ms;
+  --k-dur-slow: 320ms;
+
+  /* ═════════ LAYOUT ═════════ */
+  --k-container-max: 1200px;
+  --k-content-max: 880px;
+  --k-container-gutter: 24px;
+
+  /* ═════════ BUTTONS — soft 10px, medium weight ═════════ */
+  --k-btn-radius: 10px;
+  --k-btn-weight: 500;
+  --k-btn-h-sm: 36px;  --k-btn-px-sm: 16px; --k-btn-fs-sm: 14px;
+  --k-btn-h-md: 44px;  --k-btn-px-md: 22px; --k-btn-fs-md: 15px;  /* default · 44px touch target */
+  --k-btn-h-lg: 52px;  --k-btn-px-lg: 28px; --k-btn-fs-lg: 16px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCOPE + SEMANTIC ELEMENT DEFAULTS
+   ════════════════════════════════════════════════════════════ */
+.kds-scope {
+  font-family: var(--k-font-body);
+  color: var(--k-text-body);
+  background: var(--k-bg-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.kds-scope--canvas { background: var(--k-bg-canvas); }  /* light-green app canvas */
+
+.kds-scope h1, .kds-scope h2, .kds-scope h3,
+.kds-scope h4, .kds-scope h5, .kds-scope h6 {
+  font-family: var(--k-font-display);
+  color: var(--k-text-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+.kds-scope h1 { font-size: var(--k-fs-h1); line-height: var(--k-lh-h1); }
+.kds-scope h2 { font-size: var(--k-fs-h2); line-height: var(--k-lh-h2); }
+.kds-scope h3 { font-size: var(--k-fs-h3); line-height: var(--k-lh-h3); letter-spacing: -0.01em; }
+.kds-scope h4 { font-size: var(--k-fs-h4); line-height: var(--k-lh-h4); }
+.kds-scope p  { margin: 0; line-height: var(--k-lh-body-md); }
+.kds-scope a  { color: var(--k-text-link); text-decoration: none; }
+.kds-scope a:hover { color: var(--k-text-link-hover); text-decoration: underline; text-underline-offset: 3px; }
+/* A button written as a link must keep the button's own ink. Without this the
+   element selector above (0,1,1) outranks .kds-btn--primary (0,1,0) and an
+   <a class="kds-btn kds-btn--primary"> renders link-green text on the green
+   fill. This restores the values those classes already declare — it sets no
+   new value. */
+.kds-scope a.kds-btn, .kds-scope a.kds-btn:hover { text-decoration: none; }
+.kds-scope a.kds-btn--primary, .kds-scope a.kds-btn--primary:hover { color: var(--k-text-invert); }
+.kds-scope a.kds-btn--neutral, .kds-scope a.kds-btn--neutral:hover { color: var(--k-text-primary); }
+.kds-scope a.kds-btn--ink, .kds-scope a.kds-btn--ink:hover { color: var(--k-text-invert); }
+.kds-scope a.kds-btn--danger, .kds-scope a.kds-btn--danger:hover { color: var(--k-text-invert); }
+.kds-scope a.kds-btn--ghost, .kds-scope a.kds-btn--ghost:hover { color: var(--k-primary); }
+.kds-scope code, .kds-scope pre { font-family: var(--k-font-mono); }
+.kds-scope :focus-visible { outline: 2px solid var(--k-focus-ring); outline-offset: 2px; border-radius: 3px; }
+
+/* Eyebrow / overline label */
+.kds-eyebrow {
+  font-family: var(--k-font-mono);
+  font-size: var(--k-fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--k-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--k-text-tertiary);
+}
+/* Sticky-note highlight inside a heading — one per hero, max */
+.kds-highlight { background: var(--k-highlight); padding: 0 0.15em; border-radius: 3px; }
+
+/* ════════════════════════════════════════════════════════════
+   BUTTONS
+   ════════════════════════════════════════════════════════════ */
+.kds-btn {
+  font-family: var(--k-font-body);
+  font-weight: var(--k-btn-weight);
+  font-size: var(--k-btn-fs-md);
+  height: var(--k-btn-h-md);
+  padding: 0 var(--k-btn-px-md);
+  border-radius: var(--k-btn-radius);
+  border: 1px solid transparent;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  cursor: pointer;
+  transition: background-color var(--k-dur-fast) var(--k-ease-std),
+              border-color var(--k-dur-fast) var(--k-ease-std),
+              color var(--k-dur-fast) var(--k-ease-std);
+}
+.kds-btn:focus-visible { outline: 2px solid var(--k-focus-ring); outline-offset: 2px; }
+.kds-btn--sm { height: var(--k-btn-h-sm); padding: 0 var(--k-btn-px-sm); font-size: var(--k-btn-fs-sm); }
+.kds-btn--lg { height: var(--k-btn-h-lg); padding: 0 var(--k-btn-px-lg); font-size: var(--k-btn-fs-lg); }
+
+.kds-btn--primary { background: var(--k-primary); color: #fff; }
+.kds-btn--primary:hover { background: var(--k-primary-hover); }
+.kds-btn--primary:active { background: var(--k-primary-active); }
+
+.kds-btn--neutral { background: #fff; color: var(--k-text-primary); border-color: var(--k-gray-300); }
+.kds-btn--neutral:hover { background: var(--k-gray-50); border-color: var(--k-gray-400); }
+
+.kds-btn--ink { background: var(--k-gray-900); color: #fff; }
+.kds-btn--ink:hover { background: var(--k-gray-800); }
+
+.kds-btn--danger { background: var(--k-fail-600); color: #fff; }
+.kds-btn--danger:hover { background: var(--k-fail-700); }
+
+.kds-btn--ghost { background: transparent; color: var(--k-primary); }
+.kds-btn--ghost:hover { background: var(--k-action-50); color: var(--k-action-700); }
+
+.kds-btn--icon { width: var(--k-btn-h-md); padding: 0; background: transparent; color: var(--k-text-secondary); }
+.kds-btn--icon:hover { background: var(--k-gray-100); }
+
+.kds-btn:disabled, .kds-btn[aria-disabled="true"] {
+  background: var(--k-gray-100); color: var(--k-text-disabled);
+  border-color: transparent; cursor: not-allowed;
+}
+
+/* Text / CTA link — arrow icon nudges 3px on hover */
+.kds-link { color: var(--k-text-link); font-weight: 600; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; }
+.kds-link:hover, .kds-link:active { color: var(--k-text-link-hover); text-decoration: underline; text-underline-offset: 3px; }
+.kds-link .kds-link__icon { display: inline-flex; transition: transform var(--k-dur-fast) var(--k-ease-out); }
+.kds-link:hover .kds-link__icon { transform: translateX(3px); }
+
+/* ════════════════════════════════════════════════════════════
+   BADGES / CHIPS / TEST STATUS
+   Meaning lives on the tinted BACKGROUND + icon/dot;
+   the label text stays NEUTRAL (gray-800). Never colour-only.
+   ════════════════════════════════════════════════════════════ */
+.kds-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  border-radius: var(--k-radius-pill);
+  font-size: 12px; font-weight: 600; padding: 4px 12px;
+  color: var(--k-gray-800);
+}
+.kds-badge--pass    { background: var(--k-pass-100); }
+.kds-badge--fail    { background: var(--k-fail-100); }
+.kds-badge--flaky   { background: var(--k-warning-100); }
+.kds-badge--warning { background: var(--k-warning-100); }
+.kds-badge--pending { background: var(--k-slate-100); }
+.kds-badge--info    { background: var(--k-info-100); }
+.kds-badge--neutral { background: var(--k-gray-100); }
+.kds-badge--action  { background: var(--k-action-100); }
+.kds-badge__dot { width: 6px; height: 6px; border-radius: 50%; }
+
+/* Removable filter chip */
+.kds-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  border-radius: var(--k-radius-pill);
+  font-size: 13px; font-weight: 600; padding: 6px 14px;
+  background: var(--k-gray-100); color: var(--k-gray-800);
+  border: 1px solid var(--k-border-subtle); cursor: pointer;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SURFACES · CARDS · INPUTS  (flat — 1px borders, no shadow)
+   ════════════════════════════════════════════════════════════ */
+.kds-card {
+  background: var(--k-bg-page);
+  border: 1px solid var(--k-border-default);
+  border-radius: var(--k-radius-xl);
+  padding: 22px;
+  transition: border-color var(--k-dur-base) var(--k-ease-out),
+              background-color var(--k-dur-base) var(--k-ease-out);
+}
+.kds-card--interactive:hover { border-color: var(--k-action-300); background: var(--k-action-50); }
+
+.kds-input {
+  font-family: var(--k-font-body); font-size: 14px;
+  height: 44px; padding: 0 14px;
+  border: 1px solid var(--k-gray-300); border-radius: var(--k-btn-radius);
+  background: #fff; color: var(--k-text-body);
+  transition: border-color var(--k-dur-fast) var(--k-ease-std), box-shadow var(--k-dur-fast) var(--k-ease-std);
+}
+.kds-input:focus { outline: none; border-color: var(--k-primary); box-shadow: 0 0 0 3px rgba(15,132,97,.16); }
+.kds-input::placeholder { color: var(--k-text-disabled); }
+
+/* Code / terminal surface.
+   --k-code-ink is the mono ink on --k-bg-forest. It existed as a bare #dfe6e3
+   repeated in 52 places; the value is unchanged, it now simply has a name. */
+:root { --k-code-ink: #dfe6e3; }
+.kds-code {
+  font-family: var(--k-font-mono); font-size: 12.5px; line-height: 1.6;
+  color: var(--k-code-ink); background: var(--k-bg-forest);
+  border-radius: var(--k-radius-lg); padding: 18px 20px; overflow-x: auto;
+}
+
+/* ════════════════════════════════════════════════════════════
+   NAV · TABS · MENUS · TABLE ROWS · TOOLTIP
+   ════════════════════════════════════════════════════════════ */
+/* Sidebar nav item */
+.kds-nav-item {
+  position: relative; display: block; width: 100%; text-align: left;
+  font-family: var(--k-font-body); font-size: 14px; color: var(--k-text-secondary);
+  background: transparent; border: none; border-radius: var(--k-radius-md);
+  padding: 8px 10px; cursor: pointer;
+}
+.kds-nav-item:hover { background: var(--k-bg-muted); }
+.kds-nav-item[data-active="1"] { background: var(--k-action-50); color: var(--k-action-700); font-weight: 600; }
+.kds-nav-item[data-active="1"]::before {
+  content: ""; position: absolute; left: 0; top: 6px; bottom: 6px;
+  width: 3px; border-radius: 2px; background: var(--k-primary);
+}
+
+/* Tabs — underline style */
+.kds-tab {
+  font-family: var(--k-font-body); font-size: 14px; font-weight: 500;
+  color: var(--k-text-tertiary); background: none; border: none;
+  padding: 12px 2px; cursor: pointer; border-bottom: 2px solid transparent;
+}
+.kds-tab:hover:not([data-active="1"]):not(:disabled) {
+  color: var(--k-text-primary);
+  text-decoration: underline; text-underline-offset: 6px;
+  text-decoration-color: var(--k-border-default);
+}
+.kds-tab[data-active="1"] { color: var(--k-action-700); font-weight: 600; border-bottom-color: var(--k-primary); }
+.kds-tab:disabled { color: var(--k-text-disabled); cursor: not-allowed; }
+
+/* Dropdown menu item */
+.kds-menu-item {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  font-family: var(--k-font-body); font-size: 14px; color: var(--k-text-body);
+  background: none; border: none; border-radius: var(--k-radius-sm);
+  padding: 9px 12px; cursor: pointer; text-align: left;
+}
+.kds-menu-item:hover { background: var(--k-action-50); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Data table row hover */
+.kds-row:hover { background: var(--k-action-50); }
+
+/* Tooltip (pure CSS, on hover) */
+.kds-tip-wrap { position: relative; display: inline-flex; }
+.kds-tip {
+  position: absolute; bottom: calc(100% + 9px); left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--k-gray-900); color: #fff;
+  font-size: 12px; font-weight: 500; white-space: nowrap;
+  padding: 6px 10px; border-radius: 6px;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--k-dur-fast) var(--k-ease-std), transform var(--k-dur-fast) var(--k-ease-out);
+}
+.kds-tip::after {
+  content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: var(--k-gray-900);
+}
+.kds-tip-wrap:hover .kds-tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ════════════════════════════════════════════════════════════
+   MOTION HELPERS
+   ════════════════════════════════════════════════════════════ */
+@keyframes kds-spin { to { transform: rotate(360deg); } }
+.kds-spin { animation: kds-spin 1s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kds-scope *, .kds-btn, .kds-card, .kds-input, .kds-tip, .kds-spin, .kds-link__icon {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   SUB-BRAND LOCKUP — the one source
+   Every Katalon sub-brand is the untouched logo + a subname. All of its
+   geometry is a ratio of ONE input, --k-sub-h (the logo's rendered height),
+   so a lockup at 30px and one at 46px are the same drawing at two scales.
+   Change a ratio here and every lockup on every surface follows; hand-tuning
+   a px value at a call site is what makes 20 slightly-different lockups.
+   ════════════════════════════════════════════════════════════ */
+:root {
+  --k-sub-h: 46px;               /* the only per-instance input */
+  --k-sub-size-ratio: 0.70;      /* subname font-size ÷ logo height — caps match the wordmark */
+  --k-sub-gap-ratio: 0.48;       /* logo → subname gap ÷ logo height (≈ one cap height) */
+  --k-sub-baseline-ratio: 0.065; /* nudge so the subname sits on the wordmark baseline */
+  --k-sub-weight: 300;           /* Inter Tight Light — never another weight */
+  --k-sub-tracking: 0;           /* never tracked, never condensed */
+  --k-sub-color-product: var(--k-action-600);    /* #0F8461 — all products share it */
+  --k-sub-color-resource: var(--k-text-primary); /* near-black — resources & programs */
+  --k-sub-color-product-dark: var(--k-bright-400);  /* products on a dark ground */
+  --k-sub-color-resource-dark: var(--k-gray-0);     /* resources on a dark ground */
+}
+.k-sub-lockup {
+  display: inline-flex; align-items: flex-end;
+  gap: calc(var(--k-sub-h) * var(--k-sub-gap-ratio));
+}
+.k-sub-logo { height: var(--k-sub-h); width: auto; display: block; }
+.k-sub-name {
+  font-family: var(--k-font-display);
+  font-weight: var(--k-sub-weight);
+  font-size: calc(var(--k-sub-h) * var(--k-sub-size-ratio));
+  line-height: 1;
+  letter-spacing: var(--k-sub-tracking);
+  margin-bottom: calc(var(--k-sub-h) * var(--k-sub-baseline-ratio));
+  white-space: nowrap;
+}
+.k-sub-name--product  { color: var(--k-sub-color-product); }
+.k-sub-name--resource { color: var(--k-sub-color-resource); }
+/* On a dark ground the two category colours swap to their reverse pair —
+   still one token each, so the dark lockup can't drift from the light one. */
+.k-sub-name--product-dark  { color: var(--k-sub-color-product-dark); }
+.k-sub-name--resource-dark { color: var(--k-sub-color-resource-dark); }
+
+/* ════════════════════════════════════════════════════════════
+   PATHWAY — the generator contract
+   The graphic is code-generated, so these are the ONLY dials. A surface that
+   cannot be rebuilt from this block is off-system. Rule 06 in
+   rules/pathway.md makes these binding: no invented thickness or angle, and
+   no motion — the pathway is solid, flat and static.
+   ════════════════════════════════════════════════════════════ */
+:root {
+  /* Geometry — system defaults */
+  --k-pathway-thickness: 26.2%;   /* of the arc's outer radius */
+  --k-pathway-sweep: 90deg;        /* a quarter arc. Never another angle. */
+}
