@@ -1,0 +1,36 @@
+<!-- @dsCard group="Colors" viewport="700x200" name="Card tiers" subtitle="Every section of cards is tiered — a different hue per card" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+  .row{display:flex;flex-wrap:wrap;gap:8px}
+  .lbl{font-family:var(--k-font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+  .sw{flex:1;min-width:0;height:52px;border-radius:6px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:var(--k-font-mono);font-size:9.5px}
+  
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="lbl">Tier 1 — one pure 600 per card, a different hue on each</span>
+  <div class="row">
+    <span class="sw" style="height:44px;background:var(--k-bright-600);color:var(--k-gray-950)">bright 10.11:1</span>
+    <span class="sw" style="height:44px;background:var(--k-warning-600);color:var(--k-gray-950)">warning 13.33:1</span>
+    <span class="sw" style="height:44px;background:var(--k-info-600);color:#fff">info 5.18:1</span>
+    <span class="sw" style="height:44px;background:var(--k-slate-600);color:#fff">slate 7.34:1</span>
+    <span class="sw" style="height:44px;background:var(--k-action-900);color:#fff">forest 900</span>
+  </div>
+  <span class="lbl">Tier 2 — step 200 tint, one hue per card</span>
+  <div class="row">
+    <span class="sw" style="height:40px;background:var(--k-info-200);color:var(--k-text-primary)">info 200</span>
+    <span class="sw" style="height:40px;background:var(--k-warning-200);color:var(--k-text-primary)">warning 200</span>
+    <span class="sw" style="height:40px;background:var(--k-bright-200);color:var(--k-text-primary)">bright 200</span>
+    <span class="sw" style="height:40px;background:var(--k-slate-200);color:var(--k-text-primary)">slate 200</span>
+  </div>
+  <span class="lbl">Tier 3 — neutral ground · Forest 600 is NEVER a card fill · step 100 is NEVER a fill</span>
+</div>
+</body>
+</html>

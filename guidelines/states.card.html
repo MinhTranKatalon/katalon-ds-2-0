@@ -1,0 +1,34 @@
+<!-- @dsCard group="Spacing" viewport="700x150" name="Interaction states" subtitle="Hover tint · 700 press · visible focus · never colour alone" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+  .row{display:flex;flex-wrap:wrap;gap:8px}
+  .lbl{font-family:var(--k-font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+  .sw{flex:1;min-width:0;height:52px;border-radius:6px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:var(--k-font-mono);font-size:9.5px}
+  
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="lbl">Button states</span>
+  <div class="row">
+    <span class="kds-btn kds-btn--primary">Default</span>
+    <span class="kds-btn kds-btn--primary" style="background:var(--k-primary-hover)">Hover · 700</span>
+    <span class="kds-btn kds-btn--primary" style="background:var(--k-primary-active)">Active · 800</span>
+    <span class="kds-btn kds-btn--primary" style="outline:2px solid var(--k-focus-ring);outline-offset:2px">Focus</span>
+    <span class="kds-btn kds-btn--primary" style="background:var(--k-gray-100);color:var(--k-text-disabled)">Disabled</span>
+  </div>
+  <span class="lbl">Row / nav hover is a tint, not a colour change</span>
+  <div class="row">
+    <span style="flex:1;padding:11px 13px;border-radius:6px;font-size:14px;color:var(--k-text-body)">Rest</span>
+    <span style="flex:1;padding:11px 13px;border-radius:6px;background:var(--k-action-50);font-size:14px;color:var(--k-text-body)">Hover</span>
+    <span style="flex:1;padding:11px 13px;border-radius:6px;background:var(--k-action-100);font-size:14px;color:var(--k-action-800);font-weight:600">Selected + aria-current</span>
+  </div>
+</div>
+</body>
+</html>

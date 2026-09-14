@@ -1,0 +1,30 @@
+<!-- @dsCard group="Spacing" viewport="700x130" name="Radius" subtitle="input 8 · button 10 · banner 12 · card 16 · popup 20 · pill" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+  .row{display:flex;flex-wrap:wrap;gap:8px}
+  .lbl{font-family:var(--k-font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+  .sw{flex:1;min-width:0;height:52px;border-radius:6px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:var(--k-font-mono);font-size:9.5px}
+  
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="lbl">var(--k-radius-xs … pill)</span>
+  <div class="row">
+    <span style="display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:64px;height:44px;background:var(--k-gray-100);border:1px solid var(--k-border-default);border-radius:var(--k-radius-xs)"></span><span class="lbl">xs</span></span>
+    <span style="display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:64px;height:44px;background:var(--k-gray-100);border:1px solid var(--k-border-default);border-radius:var(--k-radius-sm)"></span><span class="lbl">sm</span></span>
+    <span style="display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:64px;height:44px;background:var(--k-gray-100);border:1px solid var(--k-border-default);border-radius:var(--k-radius-md)"></span><span class="lbl">md</span></span>
+    <span style="display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:64px;height:44px;background:var(--k-gray-100);border:1px solid var(--k-border-default);border-radius:var(--k-radius-lg)"></span><span class="lbl">lg</span></span>
+    <span style="display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:64px;height:44px;background:var(--k-gray-100);border:1px solid var(--k-border-default);border-radius:var(--k-radius-xl)"></span><span class="lbl">xl</span></span>
+    <span style="display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:64px;height:44px;background:var(--k-gray-100);border:1px solid var(--k-border-default);border-radius:var(--k-radius-2xl)"></span><span class="lbl">2xl</span></span>
+    <span style="display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:64px;height:44px;background:var(--k-gray-100);border:1px solid var(--k-border-default);border-radius:var(--k-radius-pill)"></span><span class="lbl">pill</span></span>
+  </div>
+</div>
+</body>
+</html>

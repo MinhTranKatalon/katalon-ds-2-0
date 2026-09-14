@@ -1,0 +1,31 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Green ink vs green fill" subtitle="Ink is always 700 — 600 fails on tinted grounds" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+  .row{display:flex;flex-wrap:wrap;gap:8px}
+  .lbl{font-family:var(--k-font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+  .sw{flex:1;min-width:0;height:52px;border-radius:6px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:var(--k-font-mono);font-size:9.5px}
+  
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="lbl">action-600 as ink — measured</span>
+  <div class="row">
+    <span style="flex:1;padding:11px 13px;border-radius:8px;background:var(--k-gray-0);color:var(--k-action-600);font-size:14px;font-weight:600">4.67:1 on white</span>
+    <span style="flex:1;padding:11px 13px;border-radius:8px;background:var(--k-bg-canvas);color:var(--k-action-600);font-size:14px;font-weight:600">4.14:1 on canvas — FAILS</span>
+  </div>
+  <span class="lbl">action-700 as ink — clears every ground</span>
+  <div class="row">
+    <span style="flex:1;padding:11px 13px;border-radius:8px;background:var(--k-gray-0);color:var(--k-action-700);font-size:14px;font-weight:600">6.59:1 on white</span>
+    <span style="flex:1;padding:11px 13px;border-radius:8px;background:var(--k-bg-canvas);color:var(--k-action-700);font-size:14px;font-weight:600">5.94:1 on canvas</span>
+    <span style="flex:1;padding:11px 13px;border-radius:8px;background:var(--k-action-600);color:#fff;font-size:14px;font-weight:600">600 is a FILL</span>
+  </div>
+</div>
+</body>
+</html>

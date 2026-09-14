@@ -1,0 +1,27 @@
+<!-- @dsCard group="Spacing" viewport="700x140" name="Elevation — flat" subtitle="Depth is a 1px border plus a tinted surface. No shadows." -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+  .row{display:flex;flex-wrap:wrap;gap:8px}
+  .lbl{font-family:var(--k-font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+  .sw{flex:1;min-width:0;height:52px;border-radius:6px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:var(--k-font-mono);font-size:9.5px}
+  
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="lbl">Every --k-shadow-* resolves to none</span>
+  <div class="row">
+    <span style="flex:1;padding:16px;background:var(--k-gray-0);border:1px solid var(--k-border-default);border-radius:var(--k-radius-xl);font-size:13px;color:var(--k-text-secondary)">Surface + 1px border</span>
+    <span style="flex:1;padding:16px;background:var(--k-bg-subtle);border:1px solid var(--k-border-subtle);border-radius:var(--k-radius-xl);font-size:13px;color:var(--k-text-secondary)">One surface step down</span>
+    <span style="flex:1;padding:16px;background:var(--k-bg-muted);border:1px solid var(--k-border-default);border-radius:var(--k-radius-xl);font-size:13px;color:var(--k-text-secondary)">Two steps down</span>
+  </div>
+  <span style="font-size:13px;color:var(--k-text-secondary)">Reaching for a shadow on a panel? The answer is a border and a surface step.</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!-- @dsCard group="Spacing" viewport="700x130" name="Motion" subtitle="150 hover · 200 card/menu · 320 modal/drawer" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+  .row{display:flex;flex-wrap:wrap;gap:8px}
+  .lbl{font-family:var(--k-font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+  .sw{flex:1;min-width:0;height:52px;border-radius:6px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:var(--k-font-mono);font-size:9.5px}
+  
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="lbl">var(--k-dur-fast / base / slow) · var(--k-ease-std / out / in)</span>
+  <div class="row">
+    <span style="flex:1;padding:13px;border-radius:8px;background:var(--k-gray-100);font-family:var(--k-font-mono);font-size:12px;color:var(--k-text-primary)">fast 150ms<br><span style="color:var(--k-text-tertiary)">hover · toggle</span></span>
+    <span style="flex:1;padding:13px;border-radius:8px;background:var(--k-gray-100);font-family:var(--k-font-mono);font-size:12px;color:var(--k-text-primary)">base 200ms<br><span style="color:var(--k-text-tertiary)">card · menu</span></span>
+    <span style="flex:1;padding:13px;border-radius:8px;background:var(--k-gray-100);font-family:var(--k-font-mono);font-size:12px;color:var(--k-text-primary)">slow 320ms<br><span style="color:var(--k-text-tertiary)">modal · drawer</span></span>
+  </div>
+  <span style="font-size:13px;color:var(--k-text-secondary)">No bounce, no overshoot, no parallax. Always honour prefers-reduced-motion.</span>
+</div>
+</body>
+</html>
