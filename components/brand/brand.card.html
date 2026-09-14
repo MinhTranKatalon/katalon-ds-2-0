@@ -1,0 +1,49 @@
+<!-- @dsCard group="Components" viewport="700x180" name="Sub-brand lockup" subtitle="One parameter drives size, gap and baseline" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .lbl{font-family:var(--k-font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+function Demo({ NS }) {
+  const { SubLockup } = NS;
+  return (
+    <div className="wrap">
+      <span className="lbl">Product · Forest Green name</span>
+      <div className="row" style={{ gap: 36 }}>
+        <SubLockup name="Studio" height={30} />
+        <SubLockup name="TestOps" height={24} />
+      </div>
+      <span className="lbl">Resource</span>
+      <div className="row" style={{ gap: 36 }}>
+        <SubLockup name="Academy" kind="resource" height={24} />
+      </div>
+      <div className="row" style={{ background: 'var(--k-action-900)', padding: '14px 18px', borderRadius: 'var(--k-radius-lg)' }}>
+        <SubLockup name="Studio" height={26} dark />
+      </div>
+    </div>
+  );
+}
+</script>
+<script type="text/babel" data-presets="react">
+  const NS = Object.keys(window).map(k => { try { return window[k]; } catch (e) { return null; } })
+    .find(o => o && typeof o === 'object' && o.Button && o.Card && o.Badge) || {};
+  const root = document.getElementById('root');
+  if (!NS.Button) root.innerHTML = '<div class="wrap"><span class="lbl">Design system bundle not loaded</span></div>';
+  else ReactDOM.createRoot(root).render(<Demo NS={NS} />);
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Overlays" subtitle="Modal, popover, command palette, drawer" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .lbl{font-family:var(--k-font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+function Demo({ NS }) {
+  const { Modal, Popover, CommandPalette, Drawer, Button, IconButton, Icon, MetadataList } = NS;
+  const [modal, setModal] = React.useState(false);
+  const [cmd, setCmd] = React.useState(false);
+  const [drawer, setDrawer] = React.useState(false);
+  return (
+    <div className="wrap">
+      <span className="lbl">Triggers</span>
+      <div className="row">
+        <Button variant="danger" onClick={() => setModal(true)}>Delete test case…</Button>
+        <Button variant="neutral" onClick={() => setCmd(true)}>Command palette</Button>
+        <Button variant="neutral" onClick={() => setDrawer(true)}>Run detail</Button>
+        <Popover title="How flakiness is scored"
+          trigger={<IconButton label="About flakiness"><Icon name="circle-info" size={18} /></IconButton>}>
+          A case is flaky when it changes result across retries on the same commit.
+        </Popover>
+      </div>
+      <Modal open={modal} onClose={() => setModal(false)} size="sm"
+        title="Delete “Login flow”?"
+        description="This removes the test case and its 12 steps. This can't be undone."
+        footer={<><Button variant="neutral" onClick={() => setModal(false)}>Cancel</Button><Button variant="danger">Delete test case</Button></>} />
+      <CommandPalette open={cmd} onClose={() => setCmd(false)} commands={[
+        { id: 'run', label: 'Run test suite', group: 'Execution', shortcut: '⌘R' },
+        { id: 'new', label: 'New test case', group: 'Authoring', shortcut: '⌘N' },
+        { id: 'quar', label: 'Quarantine failing cases', group: 'Maintenance' },
+      ]} />
+      <Drawer open={drawer} onClose={() => setDrawer(false)} title="Run 8f2a91"
+        footer={<Button variant="primary">Rerun failed</Button>}>
+        <MetadataList columns={2} items={[
+          { label: 'Run id', value: 'run_8f2a91', mono: true },
+          { label: 'Triggered by', value: 'CI · main' },
+          { label: 'Duration', value: '00:10:42', mono: true },
+          { label: 'Result', value: '3 of 49 failed' },
+        ]} />
+      </Drawer>
+    </div>
+  );
+}
+</script>
+<script type="text/babel" data-presets="react">
+  const NS = Object.keys(window).map(k => { try { return window[k]; } catch (e) { return null; } })
+    .find(o => o && typeof o === 'object' && o.Button && o.Card && o.Badge) || {};
+  const root = document.getElementById('root');
+  if (!NS.Button) root.innerHTML = '<div class="wrap"><span class="lbl">Design system bundle not loaded</span></div>';
+  else ReactDOM.createRoot(root).render(<Demo NS={NS} />);
+</script>
+</body>
+</html>

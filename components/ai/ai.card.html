@@ -1,0 +1,58 @@
+<!-- @dsCard group="Components" viewport="700x460" name="AI & chat" subtitle="Moving mark, chat turns, tool call, composer, citations" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<!-- thinking-mark.jsx is CommonJS (module.exports). Give it a module object, load it as
+     Babel JSX, then publish the export as a global so AiStatus can pick it up. -->
+<script>window.module = { exports: {} };</script>
+<script src="../../thinking-mark.jsx" type="text/babel" data-presets="react"></script>
+<script type="text/babel" data-presets="react">
+  window.ThinkingMark = (window.module.exports && window.module.exports.ThinkingMark) || window.ThinkingMark;
+</script>
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .lbl{font-family:var(--k-font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+function Demo({ NS }) {
+  const { AiStatus, ChatMessage, SystemMessage, ToolCall, Composer, SuggestedPrompts, MessageActions, Citation, CitationSources } = NS;
+  const [q, setQ] = React.useState('');
+  return (
+    <div className="wrap">
+      <div className="row" style={{ gap: 28 }}>
+        <AiStatus mark={window.ThinkingMark} mode="analyzing" label="Reading the failure log" />
+        <AiStatus mark={window.ThinkingMark} mode="executing" label="Running 179 cases" />
+      </div>
+      <SystemMessage icon="folder-open">Context switched to the Checkout project</SystemMessage>
+      <ChatMessage role="user" name="Minh">Why did the checkout suite fail?</ChatMessage>
+      <ToolCall name="query_runs" state="done" summary="49 rows · 3 failed" detail={'{\n  "failed": ["Login flow", "Add to cart", "Checkout"]\n}'} />
+      <ChatMessage role="assistant" aiMarkSrc="../../assets/brand-svg/ai-katalon-color.svg" footer={<MessageActions onCopy={() => {}} onRetry={() => {}} onGood={() => {}} onBad={() => {}} />}>
+        3 of 49 test cases failed. All three hit the same locator <Citation index={1} label="run 8f2a91" href="#" />.
+      </ChatMessage>
+      <CitationSources sources={[{ label: 'Run 8f2a91 · failure log', href: '#', meta: '14 Sep' }]} />
+      <SuggestedPrompts onPick={setQ} prompts={['Which cases are flaky this week?', 'Draft a test case for password reset']} />
+      <Composer value={q} onChange={setQ} hint="Katalon AI can read this project's runs and objects." />
+    </div>
+  );
+}
+</script>
+<script type="text/babel" data-presets="react">
+  const NS = Object.keys(window).map(k => { try { return window[k]; } catch (e) { return null; } })
+    .find(o => o && typeof o === 'object' && o.Button && o.Card && o.Badge) || {};
+  const root = document.getElementById('root');
+  if (!NS.Button) root.innerHTML = '<div class="wrap"><span class="lbl">Design system bundle not loaded</span></div>';
+  else ReactDOM.createRoot(root).render(<Demo NS={NS} />);
+</script>
+</body>
+</html>
