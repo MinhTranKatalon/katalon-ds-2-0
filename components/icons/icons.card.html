@@ -1,0 +1,52 @@
+<!-- @dsCard group="Components" viewport="700x150" name="Icons" subtitle="Line set, 24 grid, stroke 1.4, four sizes" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .lbl{font-family:var(--k-font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+function Demo({ NS }) {
+  const { Icon } = NS;
+  const names = ['circle-check','circle-xmark','triangle-exclamation','magnifying-glass','filter',
+    'arrows-rotate','play','bug','gauge-high','terminal','layer-group','folder-open','clock','bell','download'];
+  return (
+    <div className="wrap">
+      <span className="lbl">24px</span>
+      <div className="row" style={{ color: 'var(--k-text-secondary)', gap: 16 }}>
+        {names.map(n => <Icon key={n} name={n} size={24} />)}
+      </div>
+      <span className="lbl">16 · 20 · 24 · 32 — stroke stays 1.4</span>
+      <div className="row" style={{ color: 'var(--k-action-700)', gap: 18, alignItems: 'baseline' }}>
+        {[16, 20, 24, 32].map(s => <Icon key={s} name="circle-check" size={s} />)}
+      </div>
+    </div>
+  );
+}
+</script>
+<script type="text/babel" data-presets="react">
+  // The bundle's namespace name is generated at compile time — find it by shape
+  // instead of hard-coding it, so these cards keep working if it changes.
+  const NS = Object.keys(window).map(k => { try { return window[k]; } catch (e) { return null; } })
+    .find(o => o && typeof o === 'object' && o.Button && o.Card && o.Badge) || {};
+  const root = document.getElementById('root');
+  if (!NS.Button) {
+    root.innerHTML = '<div class="wrap"><span class="lbl">Design system bundle not loaded</span></div>';
+  } else {
+    ReactDOM.createRoot(root).render(<Demo NS={NS} />);
+  }
+</script>
+</body>
+</html>

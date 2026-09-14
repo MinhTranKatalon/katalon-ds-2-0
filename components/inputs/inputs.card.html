@@ -1,0 +1,73 @@
+<!-- @dsCard group="Components" viewport="700x380" name="Inputs" subtitle="Field, input, select, choice, switch, slider, upload" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .lbl{font-family:var(--k-font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+function Demo({ NS }) {
+  const { Field, Input, TextArea, NumberInput, Checkbox, RadioGroup, Switch, Select, Slider, TagInput, Icon } = NS;
+  const [v, setV] = React.useState('Checkout regression');
+  const [n, setN] = React.useState(30);
+  const [env, setEnv] = React.useState('staging');
+  const [sw, setSw] = React.useState(true);
+  const [cb, setCb] = React.useState(true);
+  const [sl, setSl] = React.useState(8);
+  const [tags, setTags] = React.useState(['smoke', 'checkout']);
+  return (
+    <div className="wrap" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
+      <Field label="Suite name" hint="Shown in run reports.">
+        {({ id }) => <Input id={id} value={v} onChange={e => setV(e.target.value)} />}
+      </Field>
+      <Field label="Search" >
+        {({ id }) => <Input id={id} placeholder="Find a test case" iconStart={<Icon name="magnifying-glass" size={18} />} />}
+      </Field>
+      <Field label="Browser">
+        {({ id }) => <Select id={id} options={[{value:'chrome',label:'Chrome'},{value:'firefox',label:'Firefox'}]} value="chrome" />}
+      </Field>
+      <Field label="Timeout"><NumberInput value={n} onChange={setN} min={1} max={600} unit="seconds" /></Field>
+      <Field label="Locator" error="Element not found: btn_Checkout">
+        {({ id, invalid }) => <Input id={id} invalid={invalid} defaultValue="//button[@id='checkout']" />}
+      </Field>
+      <Field label="Tags"><TagInput tags={tags} onAdd={t => setTags(x => [...x, t])} onRemove={t => setTags(x => x.filter(y => y !== t))} /></Field>
+      <RadioGroup name="env" label="Environment" value={env} onChange={setEnv}
+        options={[{ value: 'staging', label: 'Staging' }, { value: 'prod', label: 'Production', hint: 'Runs against live data.' }]} />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <Checkbox checked={cb} onChange={setCb} label="Rerun failed cases" />
+        <Switch checked={sw} onChange={setSw} label="Self-healing locators" />
+        <Slider label="Flaky threshold" value={sl} onChange={setSl} min={0} max={20} unit="%" />
+      </div>
+      <Field label="Note" style={{ gridColumn: '1 / -1' }}>
+        {({ id }) => <TextArea id={id} rows={2} defaultValue="Quarantined until the locator is fixed." />}
+      </Field>
+    </div>
+  );
+}
+</script>
+<script type="text/babel" data-presets="react">
+  // The bundle's namespace name is generated at compile time — find it by shape
+  // instead of hard-coding it, so these cards keep working if it changes.
+  const NS = Object.keys(window).map(k => { try { return window[k]; } catch (e) { return null; } })
+    .find(o => o && typeof o === 'object' && o.Button && o.Card && o.Badge) || {};
+  const root = document.getElementById('root');
+  if (!NS.Button) {
+    root.innerHTML = '<div class="wrap"><span class="lbl">Design system bundle not loaded</span></div>';
+  } else {
+    ReactDOM.createRoot(root).render(<Demo NS={NS} />);
+  }
+</script>
+</body>
+</html>

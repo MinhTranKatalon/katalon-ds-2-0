@@ -1,0 +1,68 @@
+<!-- @dsCard group="Components" viewport="700x210" name="Actions" subtitle="Button, icon button, toggle, segmented, toolbar" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .lbl{font-family:var(--k-font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+function Demo({ NS }) {
+  const { Button, IconButton, ToggleButton, SegmentedControl, Toolbar, ToolbarSeparator, ToolbarSpacer, Icon } = NS;
+  const [seg, setSeg] = React.useState('light');
+  const [on, setOn] = React.useState(true);
+  return (
+    <div className="wrap">
+      <div className="row">
+        <Button variant="primary">Start free trial</Button>
+        <Button variant="neutral">Cancel</Button>
+        <Button variant="ink">Book a demo</Button>
+        <Button variant="danger">Delete</Button>
+        <Button variant="ghost">Skip</Button>
+        <Button variant="primary" disabled>Disabled</Button>
+      </div>
+      <div className="row">
+        <Button variant="primary" size="sm">Small</Button>
+        <Button variant="primary" size="lg">Large</Button>
+        <IconButton label="Refresh"><Icon name="arrows-rotate" size={20} /></IconButton>
+        <ToggleButton pressed={on} onChange={setOn}>Only failures</ToggleButton>
+        <SegmentedControl size="sm" value={seg} onChange={setSeg}
+          options={[{ value: 'light', label: 'Light' }, { value: 'dark', label: 'Dark' }]} />
+      </div>
+      <Toolbar label="Run actions" dense>
+        <IconButton label="Run" size="sm"><Icon name="play" size={18} /></IconButton>
+        <IconButton label="Refresh" size="sm"><Icon name="arrows-rotate" size={18} /></IconButton>
+        <ToolbarSeparator />
+        <IconButton label="Filter" size="sm"><Icon name="filter" size={18} /></IconButton>
+        <ToolbarSpacer />
+        <Button variant="neutral" size="sm">Export</Button>
+      </Toolbar>
+    </div>
+  );
+}
+</script>
+<script type="text/babel" data-presets="react">
+  // The bundle's namespace name is generated at compile time — find it by shape
+  // instead of hard-coding it, so these cards keep working if it changes.
+  const NS = Object.keys(window).map(k => { try { return window[k]; } catch (e) { return null; } })
+    .find(o => o && typeof o === 'object' && o.Button && o.Card && o.Badge) || {};
+  const root = document.getElementById('root');
+  if (!NS.Button) {
+    root.innerHTML = '<div class="wrap"><span class="lbl">Design system bundle not loaded</span></div>';
+  } else {
+    ReactDOM.createRoot(root).render(<Demo NS={NS} />);
+  }
+</script>
+</body>
+</html>
