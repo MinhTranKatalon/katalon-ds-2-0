@@ -1,0 +1,87 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Data display" subtitle="Badge, card tiers, table, stat, metadata, tooltip" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .lbl{font-family:var(--k-font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+function Demo({ NS }) {
+  const { Badge, Chip, Avatar, Card, Table, List, MetadataList, Stat, Timestamp, Divider, Kbd, Tooltip, Icon } = NS;
+  const runs = [
+    { id: 1, name: 'Login flow', tone: 'pass', status: 'Passed', dur: '00:04' },
+    { id: 2, name: 'Add to cart', tone: 'fail', status: 'Failed', dur: '00:10' },
+    { id: 3, name: 'Checkout', tone: 'flaky', status: 'Flaky', dur: '00:07' },
+  ];
+  return (
+    <div className="wrap">
+      <div className="row">
+        {['pass','fail','flaky','warning','pending','info','neutral','action'].map(t =>
+          <Badge key={t} tone={t} dot>{t[0].toUpperCase() + t.slice(1)}</Badge>)}
+      </div>
+      <div className="row">
+        <Chip onRemove={() => {}}>Browser: Chrome</Chip>
+        <Avatar name="Minh Tran" />
+        <Timestamp value="2026-09-14T09:12:00Z" relative="4 minutes ago" />
+        <Kbd>⌘</Kbd><span style={{ color: 'var(--k-text-tertiary)' }}>+</span><Kbd>K</Kbd>
+        <Tooltip label="Rerun failed cases"><Badge tone="action">Hover me</Badge></Tooltip>
+      </div>
+      <Divider />
+      <div className="row" style={{ gap: 40 }}>
+        <Stat value="91%" label="Median pass rate" trend="up" trendLabel="+5 pts" hint="vs Q2" />
+        <Stat value="4.8M" label="Runs executed" hint="last 90 days" size="sm" />
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+        <Card tier={1} fill="var(--k-bright-600)" ink="var(--k-gray-950)">
+          <span className="lbl" style={{ color: 'inherit', opacity: .7 }}>Tier 1</span>
+          <strong style={{ fontFamily: 'var(--k-font-display)', fontSize: 18 }}>Pure 600 fill</strong>
+        </Card>
+        <Card tier={2} fill="var(--k-info-200)">
+          <span className="lbl">Tier 2</span>
+          <strong style={{ fontFamily: 'var(--k-font-display)', fontSize: 18 }}>Step 200 tint</strong>
+        </Card>
+        <Card tier={3}>
+          <span className="lbl">Tier 3</span>
+          <strong style={{ fontFamily: 'var(--k-font-display)', fontSize: 18 }}>Neutral ground</strong>
+        </Card>
+      </div>
+      <Table caption="Runs, last 30 days" dense columns={[
+        { key: 'name', header: 'Test case' },
+        { key: 'status', header: 'Result', render: r => <Badge tone={r.tone} dot>{r.status}</Badge> },
+        { key: 'dur', header: 'Duration', align: 'right', mono: true },
+      ]} rows={runs} />
+      <MetadataList columns={3} items={[
+        { label: 'Run id', value: 'run_8f2a91', mono: true },
+        { label: 'Triggered by', value: 'CI · main' },
+        { label: 'Duration', value: '00:10:42', mono: true },
+      ]} />
+    </div>
+  );
+}
+</script>
+<script type="text/babel" data-presets="react">
+  // The bundle's namespace name is generated at compile time — find it by shape
+  // instead of hard-coding it, so these cards keep working if it changes.
+  const NS = Object.keys(window).map(k => { try { return window[k]; } catch (e) { return null; } })
+    .find(o => o && typeof o === 'object' && o.Button && o.Card && o.Badge) || {};
+  const root = document.getElementById('root');
+  if (!NS.Button) {
+    root.innerHTML = '<div class="wrap"><span class="lbl">Design system bundle not loaded</span></div>';
+  } else {
+    ReactDOM.createRoot(root).render(<Demo NS={NS} />);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!-- @dsCard group="Components" viewport="700x400" name="Feedback" subtitle="Alert, toast, progress, status, skeleton, empty state" -->
+<!doctype html>
+<html class="kds-scope">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{margin:0;background:var(--k-bg-page)}
+  .wrap{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .lbl{font-family:var(--k-font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--k-text-tertiary)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+function Demo({ NS }) {
+  const { Alert, Toast, Progress, Spinner, StatusDot, Skeleton, EmptyState, Button, Icon } = NS;
+  return (
+    <div className="wrap">
+      <Alert tone="fail" title="Element not found: btn_Checkout"
+        action={<Button variant="neutral" size="sm">Open Object Repository</Button>}>
+        The locator changed in the last deploy.
+      </Alert>
+      <div className="row" style={{ gap: 10 }}>
+        <Alert tone="info" style={{ flex: 1 }}>Scheduled runs queue until 03:00 UTC.</Alert>
+        <Alert tone="success" style={{ flex: 1 }}>Quarantine policy applied to 12 cases.</Alert>
+      </div>
+      <Toast message="12 test cases moved to Quarantine" action={<Button variant="ghost" size="sm" style={{ color: 'var(--k-bright-400)' }}>Undo</Button>} />
+      <Progress label="Running suite" value={112} max={179} countLabel="112 of 179" />
+      <div className="row" style={{ gap: 20 }}>
+        <StatusDot tone="running" label="Running" />
+        <StatusDot tone="pass" label="Passed" />
+        <StatusDot tone="fail" label="Failed" />
+        <StatusDot tone="pending" label="Queued" />
+        <Spinner label="Loading runs" />
+      </div>
+      <Skeleton lines={2} />
+      <EmptyState icon={<Icon name="file-lines" size={32} />}
+        title="No test cases yet"
+        body="Record a flow or write one by hand. Both end up in Test Cases."
+        action={<Button variant="primary">Record a flow</Button>} />
+    </div>
+  );
+}
+</script>
+<script type="text/babel" data-presets="react">
+  const NS = Object.keys(window).map(k => { try { return window[k]; } catch (e) { return null; } })
+    .find(o => o && typeof o === 'object' && o.Button && o.Card && o.Badge) || {};
+  const root = document.getElementById('root');
+  if (!NS.Button) root.innerHTML = '<div class="wrap"><span class="lbl">Design system bundle not loaded</span></div>';
+  else ReactDOM.createRoot(root).render(<Demo NS={NS} />);
+</script>
+</body>
+</html>
