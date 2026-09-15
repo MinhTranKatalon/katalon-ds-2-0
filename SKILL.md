@@ -44,7 +44,7 @@ binding rule block. Do not fill those gaps yourself.
 
 ## 1 · Before you build
 
-1. `ds/katalon-ds.css` — the token contract. 234 `--k-*` definitions + `.kds-*` classes.
+1. `ds/katalon-ds.css` — the token contract. 235 `--k-*` definitions + `.kds-*` classes.
 2. `rules/` — the binding rules per domain: `colour`, `icons`, `product-glyphs`,
    `pathway`, `sub-brand`, `ai-mark`, `layout`, `compliance`.
 3. `components/` — **59 built components** in 9 groups; read the `.prompt.md` beside the one
@@ -184,8 +184,11 @@ nudge, never `center`. Inter Tight **300** must be loaded or it silently renders
   uppercase text.
 - **Flat system — no shadows.** Depth is a 1px border plus a tinted surface. Shadow tokens
   resolve to `none`; don't reintroduce them.
-- Radius `6 / 8 / 10 / 12 / 16 / 999` (`--k-radius-*`): input 8 · button 10 · banner 12 ·
-  card 16 · popup 20 · pill. No stray values.
+- Radius ramp `2 / 4 / 8 / 12 / 16 / 20 / 999` (`--k-radius-xs … pill`): hairline 2 ·
+  small inner detail 4 · input / text fill 8 · banner 12 · card 16 · popup 20 · pill.
+  **There is no 6px and no 10px step.** `10px` exists only as the named role token
+  `--k-btn-radius` (buttons and primary inputs) — write the token, never the literal.
+  No stray values; the linter flags anything off this ramp.
 - Spacing 4px base, `--k-sp-1..10`. Lay out with flex/grid + `gap`, never margin chains.
 - Motion: hover/toggle 150ms · card/menu 200ms · modal/drawer 320ms
   (`--k-dur-fast/base/slow`, `--k-ease-std/out/in`). Always honour
@@ -259,12 +262,12 @@ require has already been made here.
 | `deck/DECK-RULES.md` | The deck contract — 10 hard rules, theme table, the locked pathway table, the content rules, and a pre-ship checklist. Read it in full. |
 | `deck/KatalonDeck.dc.html` | The gallery deck: **39 slides from six layout kinds**. The working file — copy it, delete what the meeting doesn't need, replace copy in place. |
 | `deck/KatalonDeck Export.dc.html` | The 1920×1080 `deck-stage` build. **PPTX / PDF / Google Slides export runs from this file**, never the gallery. |
-| `deck/assets/` | The one pathway artwork, the 6px foot rule, logo variants, avatar placeholders. |
+| `deck/assets/` | The one pathway artwork, `foot-rule.svg`, logo variants, avatar placeholders. |
 
 What is **not** yours to decide in a deck: the 1920×1080 canvas · the six layout kinds · the
 per-slide pathway values (colour, size, corner, offset, rotation, opacity are locked in a
-table — never moved, recoloured, resized, added or removed) · the foot rule (6px,
-`band-pixel.svg`, unmodified, content slides only) · grounds (neutral ramp only; **Forest
+table — never moved, recoloured, resized, added or removed) · the foot rule (a solid 7-segment
+`deck/assets/pathway/foot-rule.svg`, unmodified, content slides only) · grounds (neutral ramp only; **Forest
 Green 600 is never a background**, section openers are the only brand grounds) · 24px minimum
 text · flat elevation. Only `theme`, `footerNote` and `showSlideNumbers` are tweakable.
 

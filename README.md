@@ -22,7 +22,7 @@ This is **not** the Katalon Studio (Eclipse/SWT desktop) system; that one is sep
 | `SKILL.md` | Agent-skill entry point. Point a skill at this file. |
 | `UPLOAD-GUIDE.md` | Step-by-step: GitHub upload → skill in Claude Code → skill in claude.ai (Vietnamese). |
 | `styles.css` | **CSS entry.** `@import` lines only, in the one correct order. |
-| `ds/katalon-ds.css` | **The token contract.** 234 `--k-*` definitions + the `.kds-*` classes. |
+| `ds/katalon-ds.css` | **The token contract.** 235 `--k-*` definitions + the `.kds-*` classes. |
 | `ds/line-icons.js` | The line-icon glyph set (24 grid, stroke 1.4). |
 | `tokens/fonts.css` | Webfont load. Inter Tight **300** included on purpose. |
 | `components/` | **59 React components in 9 groups**, each with a `.d.ts` contract and a `.prompt.md`. |

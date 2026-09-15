@@ -1,3 +1,7 @@
+/* ═══ Katalon DS 2.0 — token contract ═══
+   235 --k-* definitions + the .kds-* classes. Self-contained.
+   Radius ramp: 2 · 4 · 8 · 12 · 16 · 20 · 999. 10px exists only as --k-btn-radius.
+   Product glyph pairs: --k-prod-<product>-{bg,fg}, light on :root, .k-dark rebinds. */
 /* ============================================================
    TOKEN PRECEDENCE — read before editing
    This file is loaded AFTER the bound marketing design system's
@@ -327,7 +331,7 @@
 .kds-scope a.kds-btn--danger, .kds-scope a.kds-btn--danger:hover { color: var(--k-text-invert); }
 .kds-scope a.kds-btn--ghost, .kds-scope a.kds-btn--ghost:hover { color: var(--k-primary); }
 .kds-scope code, .kds-scope pre { font-family: var(--k-font-mono); }
-.kds-scope :focus-visible { outline: 2px solid var(--k-focus-ring); outline-offset: 2px; border-radius: 3px; }
+.kds-scope :focus-visible { outline: 2px solid var(--k-focus-ring); outline-offset: 2px; border-radius: var(--k-radius-xs); }
 
 /* Eyebrow / overline label */
 .kds-eyebrow {
@@ -339,7 +343,7 @@
   color: var(--k-text-tertiary);
 }
 /* Sticky-note highlight inside a heading — one per hero, max */
-.kds-highlight { background: var(--k-highlight); padding: 0 0.15em; border-radius: 3px; }
+.kds-highlight { background: var(--k-highlight); padding: 0 0.15em; border-radius: var(--k-radius-xs); }
 
 /* ════════════════════════════════════════════════════════════
    BUTTONS
@@ -505,7 +509,7 @@
   transform: translateX(-50%) translateY(4px);
   background: var(--k-gray-900); color: #fff;
   font-size: 12px; font-weight: 500; white-space: nowrap;
-  padding: 6px 10px; border-radius: 6px;
+  padding: 6px 10px; border-radius: var(--k-radius-sm);
   opacity: 0; pointer-events: none;
   transition: opacity var(--k-dur-fast) var(--k-ease-std), transform var(--k-dur-fast) var(--k-ease-out);
 }
@@ -580,4 +584,29 @@
   /* Geometry — system defaults */
   --k-pathway-thickness: 26.2%;   /* of the arc's outer radius */
   --k-pathway-sweep: 90deg;        /* a quarter arc. Never another angle. */
+}
+
+/* ═════════ PRODUCT GLYPH PAIRS ═════════
+   Seven products, one measured plate+glyph pair each. Light lives on :root;
+   .k-dark re-binds the same 14 names — a product glyph is theme-correct with no
+   branch at the call site. The dark pair is NOT an inversion of the light one:
+   each was measured against the #0c1411 dark ground (glyph clears plate ≥4.5:1).
+   Never re-tint by eye and never apply a CSS filter to cross themes. */
+:root, .kds-scope {
+  --k-prod-studio-bg:   #e3f6ee;  --k-prod-studio-fg:   #12a877;
+  --k-prod-cloud-bg:    #fdf3e1;  --k-prod-cloud-fg:    #bd862a;
+  --k-prod-local-bg:    #ebecf7;  --k-prod-local-fg:    #5b5fb0;
+  --k-prod-insights-bg: #fce8f3;  --k-prod-insights-fg: #d6388a;
+  --k-prod-testmgmt-bg: #edeefb;  --k-prod-testmgmt-fg: #7a7aef;
+  --k-prod-saas-bg:     #e9f5f7;  --k-prod-saas-fg:     #1f8a98;
+  --k-prod-support-bg:  #fcecf0;  --k-prod-support-fg:  #c0476a;
+}
+.k-dark {
+  --k-prod-studio-bg:   #074330;  --k-prod-studio-fg:   #c4e9dd;
+  --k-prod-cloud-bg:    #4c3611;  --k-prod-cloud-fg:    #efe1ca;
+  --k-prod-local-bg:    #40437b;  --k-prod-local-fg:    #dedfef;
+  --k-prod-insights-bg: #561637;  --k-prod-insights-fg: #f5cde2;
+  --k-prod-testmgmt-bg: #313160;  --k-prod-testmgmt-fg: #dedefb;
+  --k-prod-saas-bg:     #0c373d;  --k-prod-saas-fg:     #c7e2e5;
+  --k-prod-support-bg:  #86324a;  --k-prod-support-fg:  #f2dae1;
 }
