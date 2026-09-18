@@ -116,3 +116,42 @@ file. Either way the silhouette is identical, because it is 90° and 26.2% and n
 Product UI (app, dashboard, chat) · over body text · a 600 or darker step · any motion ·
 dither or pixel texture · a dot · scaled so small it reads as confetti · repeated as a
 background pattern · recoloured outside brand hues · black, outlined, or shadowed.
+
+## Brand-hue light tints — measured 2026-09-18
+
+The deck's pathway tweaks offer **one light tint per brand hue**, so a deck can be themed to
+a hue without ever putting a 600 behind content (rule 05 stands). Measured against the two
+neutral grounds the light-tint pathways actually sit on. A pathway must read as a quiet
+field: below ~1.08 it disappears, above ~1.9 it competes with the text on top of it.
+
+| Tint | Value | vs `gray-100` | vs white |
+|---|---|---|---|
+| `action-300` **default** | `#9fcec0` | 1.54 | 1.74 |
+| `action-200` | `#cfe6df` | 1.16 | 1.31 |
+| `bright-300` | `#a3efd9` | 1.17 | 1.32 |
+| `info-300` | `#e8e5ff` | 1.09 | 1.23 |
+| `pink-300` | `#eac8ea` | 1.33 | 1.51 |
+| `slate-300` | `#c2c7e4` | 1.48 | 1.67 |
+
+**Why the step differs per hue.** The 200 step is only usable on the green hues. For
+bright, info and pink the 200 lands at **1.01–1.02 on `gray-100`** — invisible — so those
+hues enter at 300. Do not normalise this table to one step; the ramps are not equally light
+at the same index.
+
+**Two hues are deliberately absent.**
+
+- **Warning** has no legal light tint here: `warning-200` is 1.07 and `warning-300` is 1.01
+  against `gray-100` — both vanish. Warning's only pathway role is the white-ground cover
+  arc, where it runs at .47 opacity.
+- **Fail** measures fine (`fail-200` 1.25, `fail-300` 1.75) but is a **status hue**. A red
+  field behind ordinary content reads as an error state, and the pathway is never a status.
+  Excluded on meaning, not on contrast.
+
+Adding a swatch means measuring it into this table first.
+
+## Editing a pathway
+
+**Never on the canvas — always through Tweaks.** The arc is painted entirely by a data-URI
+`background-image` built in `pw()`. The visual editor cannot read a data-URI, shows
+"Background: None", and writing any background from that panel resets `background-image` —
+the arc disappears. Every pathway span therefore carries `data-uneditable`. Do not remove it.
