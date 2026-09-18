@@ -24,7 +24,10 @@ readout, post-mortem — or whenever someone asks to "put this into Katalon slid
 2. **Theme is a prop, not a fork.** `theme: "light" | "dark"` on the root DC. One deck file
    serves both. Never duplicate the deck to make a dark version.
 3. **Pathway is FIXED, SOLID and STATIC.** Colour, size, corner, offset, rotation and
-   opacity are locked per slide in `pw()`. There is no pathway tweak. Do not move,
+   opacity are locked per slide in `pw()` **except for the five light-tint pathways on
+neutral grounds**, which each carry their own colour / opacity / size / corner props
+(see "Pathway tweaks" at the end of this file). Everything else — the four section
+dividers, Q&A, Thank you and the cover treatment — stays locked. Do not move,
    recolour, resize or rotate a pathway, and do not add one to a slide that has none.
    It is a **solid quarter arc in a light tint** — no dither, no dot, no gradient.
    **It never animates**, on any slide, even on request: a deck exports to PPTX and PDF,
@@ -91,7 +94,8 @@ Workflow:
    `pw*` entries in `renderVals()` are a fourth: a removed slide's pathway entry becomes
    dead code.
 4. Replace copy in place. Layout, spacing, colour and pathway stay as they are.
-5. Set `theme` (and `footerNote` / `showSlideNumbers`) in Tweaks. Nothing else is tweakable.
+5. Set `theme` (and `footerNote` / `showSlideNumbers`) in Tweaks, plus the five Pathway
+   groups if a pathway collides with content. Nothing else is tweakable.
 6. Run the checklist in §5 before handing over.
 7. **Ship nothing that belongs to the design system.** No "Back to design system" chip, no
    catalog navigation, no specimen labels, no linter badge. Those live in the catalog. A
@@ -196,11 +200,12 @@ content prints over it.
   both must agree: the `footerNote` fallback in the logic class, and the `default` in
   `data-props` — which is HTML-entity encoded, so a plain find-and-replace misses it while
   the Tweaks panel keeps seeding the old value.
-- Footer type is **18px**; the logo is **26px**. They are set independently on purpose — the
-  mark has to stay legible from the back of the room, the note does not.
-- **This is a deliberate exception to the 24px slide-type floor.** The floor governs content
-  the audience reads; the footer is chrome — a standing mark, not a line anyone reads from
-  the back of the room. Nothing else on a slide goes below 24px.
+- Footer type is **24px**; the logo is **26px**. They are set independently on purpose — the
+  mark has to stay legible from the back of the room.
+- **There is no footer exception to the 24px floor.** Rule 9 says "footers and captions
+  included" and it means it. The footer ran at 18px on 31 slides until 2026-09-18; raising it
+  introduced no overflow on any slide, so the rule stands as written and the code now matches.
+  Nothing on a slide goes below 24px.
 
 ## 3d · Typographic marks are not icons
 
@@ -272,7 +277,7 @@ mark, and a chevron is not a stepper.
 
 **Type & icons**
 
-- [ ] No text below 24px.
+- [ ] No text below 24px — footer and captions included, no exceptions.
 - [ ] Sentence case everywhere except the mono eyebrow.
 - [ ] Icons are line style, rounded, neutral in colour.
 
@@ -281,7 +286,10 @@ mark, and a chevron is not a stepper.
 - [ ] No console errors; no broken image references.
 - [ ] No unresolved `var(--*)` tokens; no duplicate element ids.
 - [ ] Nothing overflows its slide box.
-- [ ] Only `theme`, `footerNote` and `showSlideNumbers` are exposed as tweaks.
+- [ ] Only `theme`, `footerNote`, `showSlideNumbers` and the five Pathway groups are
+      exposed as tweaks.
+- [ ] No translucent text anywhere — including inside a scoped token override.
+- [ ] Every fixed fill carries fixed ink (see "The theme contract").
 - [ ] All referenced assets exist inside the skill folder — no cross-project paths.
 
 **Export**
@@ -299,3 +307,102 @@ mark, and a chevron is not a stepper.
 - c2pa metadata on uploaded SVGs blocks canvas rasterisation — strip `<metadata>` and
   `xmlns:c2pa` before processing.
 - There is no charting library in the deck; charts are markup.
+
+---
+
+## The theme contract — added 2026-09-18
+
+### The one rule that governs every fixed fill
+
+**A ground that does not change between themes must carry ink that does not change
+either.** The failure is silent and total. `--k-text-primary` resolves to `#ffffff` under
+`[data-theme="dark"]`, so a yellow `warning-600` ground — which the dark layer does **not**
+rebind — rendered white-on-yellow at **1.40:1**.
+
+Two legal ways to do it, both in this deck:
+
+1. **Literals.** Pin the ground *and* the ink. Slide 03's part divider is `#fed730` with
+   `#1f2925` (10.68) and `#3c4642` (6.98).
+2. **A scoped token override.** Redefine the ink tokens on the fill itself, as the award
+   card does: `--k-text-primary:#0c1411` and friends declared on the yellow `<div>`. This is
+   the better pattern when many children inherit — but the override values must be solid.
+
+**Yellow is the trap.** On `warning-600` nothing lighter than gray-800 passes:
+`warning-800` measures **1.97**, `warning-900` **3.33**, white **1.40**. A yellow ground
+takes near-black ink — a different question from yellow *text on* a light ground, which is
+where the 800/900 rule comes from.
+
+### No translucent text — including inside a scoped override
+
+Every `rgba()` ink was composited over its real ground and replaced with the solid
+equivalent. Dark-layer text tokens, composited over the **lightest** dark ground
+(`#16231e`) so one hex clears 4.5:1 on all three:
+
+| Token | Was | Now | On the three dark grounds |
+|---|---|---|---|
+| `--k-text-body` | `rgba(255,255,255,.88)` | `#e3e5e4` | 12.83 · 13.80 · 14.77 |
+| `--k-text-secondary` | `.76` | `#c7cac9` | 9.84 · 10.58 · 11.32 |
+| `--k-text-tertiary` | `.60` | `#a2a7a5` | 6.66 · 7.16 · 7.66 |
+| `--k-gray-400` | `.52` | `#8f9593` | 5.33 · 5.73 · 6.13 |
+| `--k-gray-300` | `.22` | `#495350` | rule/border role, 3:1 bar |
+
+The award card's scoped override took the same treatment against its yellow fill:
+`rgba(12,20,17,.80)` → `#3c3b17` (8.18) and `.64` → `#635a1c` (4.98). Its `.12`/`.18`
+values stay — those are hairlines, not text.
+
+### The mirror rule: a theme-following ground needs theme-following ink
+
+The fixed-fill rule has an inverse that is just as easy to break, usually while fixing the
+first one. A label on a `gray-200` ground failed light theme at 3.72, was pinned to a
+literal, and immediately failed **dark** at 2.82 — the ground kept flipping while the ink
+no longer did.
+
+When neither the original token nor a literal works in both themes, the role needs its own
+name. That is why this deck now carries two `--deck-*` role tokens rather than reusing
+contract tokens:
+
+| Role | Light | Dark | Why no contract token fits |
+|---|---|---|---|
+| `--deck-rule` | `#e1e7e4` | `rgba(255,255,255,.20)` | `gray-200` is a **ground** — dark rebinds it darker than the card it draws on; `border-strong` is near-black in light |
+| `--deck-warn-ink` | `#6e5b13` | `#fed730` | `warning-900` is 3.72 on the light ground; a literal dark enough for light is 2.82 on the dark one |
+
+### `--deck-rule` — the hairline drawn ON a card
+
+`#e1e7e4` light, `rgba(255,255,255,.20)` dark. Gridlines, axis rules, the unfilled track
+behind a bar. They were `--k-gray-200`, which is a **ground** token: the dark layer rebinds
+it to `#0c1411`, *darker* than the `#16231e` card it draws on, so all 19 vanished in dark
+theme. `--k-border-strong` is not the fix either — it is `#1f2925` in light and reads as
+near-black ink.
+
+**The general rule:** before reusing a token in a new role, resolve it in **both** themes
+and measure it against the surface it will actually sit on. The dark layer rebinds ground
+tokens along a different axis from border tokens.
+
+---
+
+## Pathway tweaks — added 2026-09-18
+
+The five light-tint pathways on neutral grounds are tweakable, **each with its own group**:
+02 Agenda · 00b Speaker · 00f Leaders (3) · 00g Leaders (4) · 15 Quote. Colour, opacity,
+size and corner per group.
+
+They are deliberately **not** grouped into one control: they sit on different grounds, in
+different corners, and are tuned to different clearances. 00f and 00g shared one `pwLeaders`
+until 2026-09-18, so changing one changed the other — they are now `pwLeaders3` /
+`pwLeaders4`.
+
+**Size is bounded on both sides.** The arc is a quarter annulus centred on the slide corner
+with its band between `0.73 × size` and `size`, so a **larger** size moves the band *away*
+from the corner. On 02 Agenda that means growing the arc clears the footer but closes on the
+roman-numeral column:
+
+| size | clearance to "Strictly confidential" | clearance to the numerals |
+|---|---|---|
+| 600 | 2px — touching | 144px |
+| **710** (default) | **82px** | **34px** |
+| 760 | 119px | −16px — cuts the numerals |
+
+**Every pathway span is `data-uneditable`.** The arc is painted entirely by a data-URI
+`background-image` built in `pw()`; the canvas editor reads that as "Background: None" and
+wipes it on the first touch, so the arc disappears when you click it. Pathways are edited
+through Tweaks. Never remove the attribute.
